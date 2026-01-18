@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Admin Dashboard</h2>
+  <ul>
+    <li><a href="{{ url_for('add_product') }}">+Add Product</a></li>
+    <li><a href="{{ url_for('index') }}">View Products</a></li>
+    <li><a href="{{ url_for('gifts_page') }}">Manage Gifts</a></li>
+    <li><a href="{{ url_for('admin_orders') }}">View All Orders</a></li> 
+
+    <li><a href="{{ url_for('admin_users') }}">View Users</a></li>
+    <li><a href="{{ url_for('add_gift') }}">Add Gift</a></li>
+    <li><a href="{{ url_for('approve_users') }}">Approve Users</a>
+   
+    </ul>
+</div>
+{% endblock %}

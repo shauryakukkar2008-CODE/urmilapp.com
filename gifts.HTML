@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">🎁 Redeem Gifts</h2>
+
+<p>You earn points on every purchase. Redeem your electrician gifts below.</p>
+
+<div class="row">
+  {% for g in gifts %}
+  <div class="col-md-3 mb-4">
+    <div class="card">
+{% if g.image_filename %}
+<img src="{{ url_for('static', filename='uploads/' + g.image_filename) }}"
+     class="card-img-top">
+{% endif %}
+      <div class="card-body">
+        <h5 class="card-title">{{ g.name }}</h5>
+        <p class="card-text">
+          Required Points: <b>{{ g.points }}</b>
+        </p>
+        <button class="btn btn-success btn-sm" disabled>Redeem (Coming Soon)</button>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

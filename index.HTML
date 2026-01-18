@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+
+  <h2 class="mb-4">Products</h2>
+
+  <div class="row">
+    {% for p in products %}
+    <div class="col-md-4 mb-3">
+      <div class="card h-100">
+
+        {% if p.image_filename %}
+          <img
+            src="{{ url_for('static', filename='uploads/' + p.image_filename) }}"
+            class="card-img-top"
+            alt="{{ p.name }}"
+          >
+        {% endif %}
+
+        <div class="card-body">
+          <h5 class="card-title">{{ p.name }}</h5>
+          <p class="card-text">₹{{ p.price }}</p>
+
+          <a href="{{ url_for('product_detail', pid=p.id) }}"
+             class="btn btn-primary btn-sm">
+            View
+          </a>
+
+          {% if current_user.is_authenticated and current_user.is_admin %}
+            <form method="POST"
+                  action="{{ url_for('delete_product', pid=p.id) }}"
+                  style="display:inline;">
+              <button class="btn btn-danger btn-sm"
+                      onclick="return confirm('Delete product?')">
+                Delete
+              </button>
+            </form>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

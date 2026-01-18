@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Approve Users</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f5f7fa; padding: 20px; }
+        h2 { text-align: center; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .approve-btn {
+            background: #27ae60;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        .approve-btn:hover {
+            background: #219150;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 20px;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Pending User Approvals</h2>
+
+{% if users %}
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Role</th>
+        <th>Action</th>
+    </tr>
+
+    {% for user in users %}
+    <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phone }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+            <a class="approve-btn" href="{{ url_for('approve_user', user_id=user.id) }}">
+                Approve
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% else %}
+<div class="empty">
+    <h3>No pending users 🎉</h3>
+</div>
+{% endif %}
+
+</body>
+</html>

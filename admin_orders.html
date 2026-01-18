@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>All Orders (Admin)</h2>
+
+<table class="table table-bordered">
+<tr>
+    <th>Order ID</th>
+    <th>User</th>
+    <th>Status</th>
+    <th>Change Status</th>
+    <th>Total</th>
+    <th>Invoice</th>
+</tr>
+
+{% for order in orders %}
+<tr>
+    <td>{{ order.id }}</td>
+    <td>{{ order.user_id }}</td>
+
+    <!-- Current Status -->
+    <td><b>{{ order.status }}</b></td>
+
+    <!-- Change Status Form -->
+    <td>
+        <form method="POST"
+              action="{{ url_for('update_order_status', oid=order.id) }}">
+            
+            <select name="status" class="form-control" required>
+                <option value="Pending" {% if order.status=='Pending' %}selected{% endif %}>Pending</option>
+                <option value="Processing" {% if order.status=='Processing' %}selected{% endif %}>Processing</option>
+                <option value="Shipped" {% if order.status=='Shipped' %}selected{% endif %}>Shipped</option>
+                <option value="Delivered" {% if order.status=='Delivered' %}selected{% endif %}>Delivered</option>
+            </select>
+
+            <button type="submit" class="btn btn-sm btn-success mt-1">
+                Update
+            </button>
+        </form>
+    </td>
+
+    <td>₹{{ order.total_amount }}</td>
+
+    <!-- Invoice Button -->
+    <td>
+        <a href="{{ url_for('order_detail', order_id=order.id) }}"
+           class="btn btn-sm btn-primary">
+            View Invoice
+        </a>
+    </td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

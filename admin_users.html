@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Registered Users</h2>
+
+  <table class="table table-bordered">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Role</th>
+      <th>Admin</th>
+    </tr>
+
+    {% for u in users %}
+    <tr>
+      <td>{{ u.id }}</td>
+      <td>{{ u.name }}</td>
+      <td>{{ u.email }}</td>
+      <td>{{ u.phone }}</td>
+      <td>{{ u.role }}</td>
+      <td>{{ 'Yes' if u.is_admin else 'No' }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}
