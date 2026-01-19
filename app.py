@@ -353,7 +353,7 @@ class OrderModelView(MyModelView):
             award_points_for_order(model)
 
 
-admin = Admin(app, name='Urmil Admin', index_view=MyAdminIndex(), template_mode='bootstrap4')
+admin = Admin(app, name='Urmil Admin', index_view=MyAdminIndex())
 admin.add_view(MyModelView(User, db.session))
 admin.add_view(MyModelView(Product, db.session))
 admin.add_view(MyModelView(Gift, db.session))
